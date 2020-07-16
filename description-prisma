@@ -1,0 +1,10 @@
+create postgress server(db) form heroku 
+install pgadmin
+configure heroku postgress db in pgAdmin 
+install docker commuinity edition for mac
+run docker
+
+now go to prisma.io
+
+prisma.io
+prisma.io/docs/

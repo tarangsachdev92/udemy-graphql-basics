@@ -1,0 +1,136 @@
+
+// subscription {
+//     count
+//   }
+
+subscription {
+  comment(postId:"11"){
+    id text author{
+      name
+    }
+  }
+}
+
+mutation{
+  createComment(data:{text:"this is new best of all",author:"1",post:"10"}){
+    id text
+  }
+}
+
+subscription {
+  post {
+    id
+    title
+    body
+    author {
+      id
+      name
+      age
+    }
+  }
+}
+
+mutation {
+  createPost(
+    data: {
+      title: "dummy title"
+      published: true
+      author: "1"
+      body: "This is my new post that get notify if it"
+    }
+  ) {
+    title
+    body
+  }
+}
+
+
+////////////////// - -- - -- - -- --- - - --- - -- - - 
+now provide what is happening in post subscription, because on delete,update and create post, 
+we only calling pubsub.publish with only post data,not sending what happend(like add,remove or update)
+so we add mutation property for that which descirbe "CREATED","Updated" or "Deleted"
+
+----> so change subscription in graphql
+
+subscription {
+  post {
+    mutation
+    data {
+      id
+      title
+      body
+      author {
+        id
+        name
+        age
+      }
+    }
+  }
+}
+
+mutation {
+  updatePost(
+    data: {
+      title: "dummy title"
+      published: true
+      body: "This is my new post that get notify if it"
+    },id:"10"
+  ) {
+    title
+    body
+    published
+  }
+}
+
+
+mutation {
+  createPost(
+    data: {
+      title: "dummy title"
+      published: true
+      author: "1"
+      body: "This is my new post that get notify if it"
+    }
+  ) {
+    title
+    body
+  }
+}
+
+
+====================== > > > >> > > >> > > > >>> > >> >>  -=  ======================
+
+
+
+query{
+  comments{
+    id text
+    post{id}
+    
+  }
+}
+subscription{
+  comment(postId:"10"){
+     mutation data{
+      text
+    }
+  }
+}
+
+mutation{
+  createComment(data:{text:"this is my comment",post:"10",author:"1"}){
+    text id
+  }
+}
+
+mutation{
+  updateComment(data:{text:"this is my comment"} id:"103"){
+    text id
+  }
+}
+
+mutation{
+  deleteComment(id:"102"){
+    text id
+  }
+}

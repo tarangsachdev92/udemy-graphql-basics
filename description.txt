@@ -1,0 +1,94 @@
+video 7 - graphql queries
+
+visit below link
+https://graphql-demo.mead.io/  -> graphql playground
+
+query{                  
+  course
+}
+
+output be like
+{
+  "data": {
+    "course": "GraphQL"
+  }
+}
+
+query{
+  hello
+}
+
+==output==
+{
+  "data": {
+    "hello": "Hello world!"
+  }
+}
+
+
+<== queries ==>
+
+query{
+  users{
+    name email
+  }
+}
+
+query{
+  posts{
+    id title body published
+  }
+}
+
+{
+  hello
+  course
+  courseInstructor
+  me {
+    id
+    name
+  }
+}
+
+video - 9 -setting up bable
+npm install babel-cli@6.26.0 babe-preset-env@1.7.0
+
+video 10 - export and import 
+
+video 11 - create you own GraphQL API
+npm i graphql-yoga@1.16.7
+
+video 12 - sclaer type
+
+video 13 - live reolad
+npm install nodemon@latest --save-dev
+
+video 26 - the object spread operator with node js
+npm install babel-plugin-transform-object-rest-spread@6.26.0
+
+video 27 - input type 
+
+instead of 
+//     createUser(name: String!, email: String!, age:Int): User!
+
+we do
+//        createUser(data: createUserInput): User!
+
+// here we can only provide input which have only scaler values , so we can not do createUser(data: User)
+
+where User is ('type' not input)
+
+type User {
+        id: ID!
+        name: String!
+        email: String!
+        age: Int
+        posts: [Post!]!
+        comments: [Comment!]!
+}
+  
+input createUserInput {
+        name: String!
+        email: String!
+        age:Int
+}
